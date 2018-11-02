@@ -1,2 +1,3 @@
 # Spec_ResNet
-Spectrogram is selected as preprocessing feature of audios and a feature representation method based on deep residual network (Spec-ResNet) is proposed to detect audio steganography.
+    Spectrogram is selected as preprocessing feature of audios and a feature representation method based on deep residual network (Spec-ResNet) is proposed to detect audio steganography.
+    First of all, we analysed existing audio steganography based on AAC. Even though there exist multiple modifying areas, the key is to change MDCT(Modified Discrete Cosine Transform) coeifficients. Spectrogram, which can reflect the energy amplitude information of different frequency bands changing over time, is extracted from audios as preprocessing feature to get classification feature based on deep residual network. In addition, a general audio steganalysis method is constructed by the fusion of different scale spectrogram features.
