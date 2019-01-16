@@ -13,7 +13,7 @@
     Still, this is a work on progress, we will update it lately.
 
 # Requirements
-     Specifically, this project is based on Tensorflow 1.0.0 + CUDA 8.0.61 + CuDNN 5.1.10 + Python 2.7.15.
+    Specifically, this project is based on Tensorflow 1.0.0 + CUDA 8.0.61 + CuDNN 5.1.10 + Python 2.7.15.
     The code has been tested on Ubuntu 16.04.
      
 # Data set
