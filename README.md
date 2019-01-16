@@ -1,14 +1,14 @@
 # Spec_ResNet
-    Spectrogram is selected as preprocessing feature of audio samples and a feature representation 
-    method based on deep residual network (Spec-ResNet) is implemented here to detect audio steganography
-    based on AAC(Advanced Audio Coding).
+    Spectrogram is selected as preprocessing feature of audio samples and a feature representation method
+    based on deep residual network (Spec-ResNet) is implemented here to detect audio steganographybased on
+    AAC(Advanced Audio Coding).
     
-    First of all, we analysed existing audio steganography based on AAC. Although the embedding domain
-    is different, the final impact of existing schemes are the change of the MDCT coefficients of the encoded
-    audio signals in different frequency range. Spectrogram, a basic visual representation of the spectrum of
-    frequencies of audio signals which can show the energy amplitude information of different frequency bands
-    changing over time is chosen as analysis object of ResNet to get 40-dimension classification featureto 
-    decide whether or not a piece of audio contains secret message.
+    First of all, we analysed existing audio steganography based on AAC. Although the embedding domain is 
+    different, the final impact of existing schemes are the change of the MDCT coefficients of the encoded
+    audio signals in different frequency range. Spectrogram, a basic visual representation of the spectrum
+    of frequencies of audio signals which can show the energy amplitude information of different frequency
+    bands changing over time is chosen as analysis object of ResNet to get 40-dimension classification feature
+    to decide whether or not a piece of audio contains secret message.
     
     Still, this is a work on progress, we will update it lately.
 
@@ -17,16 +17,6 @@
     The code has been tested on Ubuntu 16.04.
      
 # Data set
-    The data set is too large to be uploaded, but the structure of the data directory is as follows: 
-        cover/
-            *.txt
-        lsbee_0.1/
-            *.txt
-        lsbee_0.3/
-            *.txt
-        lsbee_0.5/
-            *.txt
-        lsbee_0.8/
-            *.txt
-        lsbee_1.0/
-            
+    The data set is too large to be uploaded, there is 15 data directory 'alog_ebr' besides 'cover': 'lsbee_0.1',
+    'lsbee_0.3', 'lsbee_0.5'，'lsbee_0.8'，'lsbee_1.0'，'min_0.1', 'min_o.3', 'min_0.5', 'min_0.8', 'min_1.0',
+    'sign_0.1', 'sign_0.3', 'sign_0.5', 'sign_0.8', 'sign_1.0'.           
