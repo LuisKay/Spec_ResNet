@@ -17,4 +17,16 @@
     The code has been tested on Ubuntu 16.04.
      
 # Data set
-    The data uploaded is recompressed WAV file, including 
+    The data set is too large to be uploaded, but the structure of the data directory is as follows: 
+        cover/
+            *.txt
+        lsbee_0.1/
+            *.txt
+        lsbee_0.3/
+            *.txt
+        lsbee_0.5/
+            *.txt
+        lsbee_0.8/
+            *.txt
+        lsbee_1.0/
+            
