@@ -21,4 +21,5 @@
     `lsbee_0.3`, `lsbee_0.5`，`lsbee_0.8`，`lsbee_1.0`，`min_0.1`, `min_o.3`, `min_0.5`, `min_0.8`, `min_1.0`,
     `sign_0.1`, `sign_0.3`, `sign_0.5`, `sign_0.8`, `sign_1.0`. In `algo_ebr`, `algo`: [LSB_EE](https://www.computer.org/csdl/proceedings/mines/2010/4258/00/4258a841-abs.html), [MIN](http://en.cnki.com.cn/Article_en/CJFDTOTAL-XXWX201107046.htm), [SIGN](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=5629745) represnts
     the steganographic algorithm from which this sample is generated and `ebr` is the relative embedding rate: 0.1,
-    0.3, 0.5, 0.8, 1.0.           
+    0.3, 0.5, 0.8, 1.0.    
+    Publishing in StackEdit makes it simple for you to publish online your files. Once you're happy with a file, you can publish it to different hosting platforms like **Blogger**, **Dropbox**, **Gist**, **GitHub**, **Google Drive**, **WordPress** and **Zendesk**. With [Handlebars templates](http://handlebarsjs.com/), you have full control over what you export.
