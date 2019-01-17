@@ -14,5 +14,5 @@ Specifically, this project is based on Tensorflow 1.0.0 + CUDA 8.0.61 + CuDNN 5.
 # Data set
 There is 15 data directory `algo_ebr` besides `cover`: `lsbee_0.1`, `lsbee_0.3`, `lsbee_0.5`，`lsbee_0.8`，`lsbee_1.0`，`min_0.1`, `min_o.3`, `min_0.5`, `min_0.8`, `min_1.0`,`sign_0.1`, `sign_0.3`, `sign_0.5`, `sign_0.8`, `sign_1.0`. In `algo_ebr`, `algo`: [lsb_ee](https://www.computer.org/csdl/proceedings/mines/2010/4258/00/4258a841-abs.html), [min](http://en.cnki.com.cn/Article_en/CJFDTOTAL-XXWX201107046.htm), [sign](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=5629745) represents the steganographic algorithm from which this sample is generated and `ebr` is the relative embedding rate: 0.1, 0.3, 0.5, 0.8, 1.0.
 
-Each data directory contains 10000 files(1.txt, 2.txt, ..., 10000.txt). Because the data set is too large to be uploaded, a samples subset is uploaded.
+Each data directory contains 10000 files(1.txt, 2.txt, ..., 10000.txt). Because the data set is too large to be uploaded, a `sample_subset`  is uploaded, including decoded wave file, spectrogram feature extraction script, and responding spectrogram matrix with window size `N=512`.
 
