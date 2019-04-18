@@ -16,3 +16,5 @@ There is 15 data directory `algo_ebr` besides `cover`: `lsbee_0.1`, `lsbee_0.2`,
 
 Each data directory contains 10000 files(1.txt, 2.txt, ..., 10000.txt). Because the whole data set is too large to be uploaded here, we put it on other platform [https://pan.baidu.com/s/1a6oT_iQcZLXB9CXs6Fg_rA](https://pan.baidu.com/s/1a6oT_iQcZLXB9CXs6Fg_rA) and a subset is uploaded, including decoded wave file, spectrogram feature extraction script in **AAC (2s, stereo, 1024Kbps, decoded WAV).rar**, and responding spectrogram matrix with window size `N=512` in **Spectrogram.rar**.
 
+# Experiments
+for AAC based steganographic algorithm, we choose above three as objects. Considering the capicity of MP3stego, we choose several emerging MP3 adaptive steganography to test the detection ability. It wil be coming soon...
