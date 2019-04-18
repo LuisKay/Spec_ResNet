@@ -122,21 +122,24 @@ def read_test_data():
     return test_data, test_labels_data
 
 #shuffle train set before each epochs begin
-def shuffle(data, labels):
+def shuffle(data):
     data_len = len(data)
-    li = range(data_len)
-    random.shuffle(li)
-    for i in li:
-        new_data = data[i]
-        new_labels = labels[i]
-
-    return new_data, new_labels
+    data_cpy = copy.copy(data)
+    tmp0 = np.arange(data_len / 2, dtype=np.int64)
+    np.random.shuffle(tmp0)
+    tmp1 = np.reshape(tmp0, (-1, 1))
+    tmp1 = tmp1 * 2
+    tmp2 = tmp1 + 1
+    tmp3 = np.concatenate((tmp1, tmp2), axis=1)
+    perm = np.reshape(tmp3, (data_len,))
+    for i in range(data_len):
+        data[i] = data_cpy[perm[i]]
 
 #divide original train set into trian set and validation set
 def divide_train_set(train_files, train_labels):
     proportion = 0.8# division ratio
 
-    shuffle(train_files, train_labels)
+    shuffle(train_files)
 
     new_train_files = train_files[: int(len(train_files) * proportion)]
     new_train_labels = train_labels[: int(len(train_files) * proportion)]
@@ -193,7 +196,7 @@ def main():
             batch_index += hps.batch_size
 
             if batch_index > len(train_datas):
-                shuffle(train_datas, train_labels)
+                shuffle(train_datas)
                 start = 0
                 batch_index = hps.batch_size
 

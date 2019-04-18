@@ -19,7 +19,7 @@ class model(object):
         f_mdct = self.fixed_conv('fixed_conv_filter', mdct_reshape, 3, 1, self.hps.channels, [1, 1, 1, 1])
 
         with tf.variable_scope('init'):
-            x = self._conv('init_conv', f_mdct, 3, self.hps.channels, 16, self._stride_arr(1))
+            x = self._conv('init_conv', f_mdct, 3, self.hps.channels, 10, self._stride_arr(1))
 
         strides = [1, 2, 2]
         activate_before_residual = [True, False, False]
