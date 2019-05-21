@@ -23,17 +23,18 @@ test_num = 6000
 bound = test_num // 15
 HParams = namedtuple('HParams',
                      'batch_size, num_classes, start_lrn_rate, decay_rate, feature_row, feature_col, channels, '
-                     'mode, num_residual_units, weight_decay_rate, optimizer')
-hps = HParams(batch_size=32,  # 'number of samples in each iteration',
+                     'is_training, num_residual_units, weight_decay_rate, BN_decay, optimizer')
+hps = HParams(batch_size=16,  # 'number of samples in each iteration',
               num_classes=2,  # 'binary classfication',
               start_lrn_rate=0.001,  # 'starting learning rate',
-              decay_rate=0.9,  # 'decaying rate of learning rate ',
+              decay_rate=0.95,  # 'decaying rate of learning rate ',
               feature_row=256,
               feature_col=256,
               channels=4,   # 'number of initial channel'
-              mode='train',  # "mode control, 'train' or 'test'."
+              is_training=True,  # "is training or not."
               num_residual_units=5,  # 'number of residual unit in each different residual module',
               weight_decay_rate=0.0002, # 'decaying rate of weight '
+			  BN_decay=0.9997
               optimizer='adam')  # "optimizer, 'adam' or 'sgd', default to 'adam'."
 
 # Read file name and convert all file name into a name
@@ -227,11 +228,15 @@ def main():
                     if step >= 2700:
                         file = open('./loss.txt', 'w')
                         for length in range(0, len(loss_list), 1):
+						    file.write(str(length+1))
+                            file.write('\t')
                             file.write(str(loss_list[length]));
                             file.write('\n')
                         file.close()
                         file = open('./valid_acc.txt', 'w')
                         for length in range(0, len(valid_acc_list), 1):
+							file.write(str(length+1))
+                            file.write('\t')
                             file.write(str(valid_acc_list[length]));
                             file.write('\n')
                         file.close()

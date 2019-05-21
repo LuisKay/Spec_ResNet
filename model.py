@@ -1,6 +1,8 @@
 # -*- coding: UTF-8 -*-
 # tensorflow version 1.0
 import tensorflow as tf
+from tensorflow.python.training import moving_averages
+from tensorflow.python.ops import control_flow_ops
 import six
 import numpy as np
 
@@ -152,26 +154,29 @@ class model(object):
         """Batch normalization."""
         with tf.variable_scope(name):
             params_shape = [x.get_shape()[-1]]
-
+            #return a tuple
             beta = tf.get_variable(
                 'beta', params_shape, tf.float32,
                 initializer=tf.constant_initializer(0.0, tf.float32))
             gamma = tf.get_variable(
                 'gamma', params_shape, tf.float32,
                 initializer=tf.constant_initializer(1.0, tf.float32))
+            mean, variance = tf.nn.moments(x, [0, 1, 2], name='moments')
+            moving_mean = tf.get_variable(
+                'moving_mean', params_shape, tf.float32,
+                initializer=tf.constant_initializer(0.0, tf.float32),
+                trainable=False)
+            moving_variance = tf.get_variable(
+                'moving_variance', params_shape, tf.float32,
+                initializer=tf.constant_initializer(1.0, tf.float32),
+                trainable=False)
+            updated_mean = moving_averages.assign_moving_average(moving_mean,
+                                                                mean, self.hps.BN_decay)
+            updated_variance = moving_averages.assign_moving_average(moving_variance,
+                                                                    variance, self.hps.BN_decay)
 
-            if self.hps.mode == 'train':
-                mean, variance = tf.nn.moments(x, [0, 1, 2], name='moments')
-
-            else:
-                mean = tf.get_variable(
-                    'moving_mean', params_shape, tf.float32,
-                    initializer=tf.constant_initializer(0.0, tf.float32),
-                    trainable=False)
-                variance = tf.get_variable(
-                    'moving_variance', params_shape, tf.float32,
-                    initializer=tf.constant_initializer(1.0, tf.float32),
-                    trainable=False)
+            mean, variance = control_flow_ops.cond(tf.cast(self.hps.is_training,tf.bool),lambda:(mean,variance),
+                                                   lambda:(updated_mean,updated_variance))
             # epsilon used to be 1e-5. Maybe 0.001 solves NaN problem in deeper net.
             y = tf.nn.batch_normalization(
                 x, mean, variance, beta, gamma, 1e-5)
