@@ -8,7 +8,7 @@ import numpy as np
 import timeit
 import random
 
-import os
+#import os
 import model
 from tensorflow.python.framework import graph_util
 from tensorflow.python.platform import gfile
@@ -159,6 +159,7 @@ def compute_time():
     h, m = divmod(m, 60)
     d, h = divmod(h, 24)
     print('Run time: %d:%02d:%02d:%02d' % (d, h, m, s))
+
 #calculate the prediction accuracy
 def  get_acc(sess, correct_count, mdct_placeholder, labels_placeholder, mdct_data, labels_data):
     batch_size = hps.batch_size
@@ -168,9 +169,9 @@ def  get_acc(sess, correct_count, mdct_placeholder, labels_placeholder, mdct_dat
     num_examples = steps_per_epoch*batch_size
 
     for step in xrange(steps_per_epoch):
-        liu_label = np.reshape(labels_data, [len(mdct_data), 1])
+        reshaped_label = np.reshape(labels_data, [len(mdct_data), 1])
         feed_dict = {mdct_placeholder:mdct_data[step*batch_size:step*batch_size+batch_size],
-                     labels_placeholder:liu_label[step*batch_size:step*batch_size+batch_size]}
+                     labels_placeholder:reshaped_label[step*batch_size:step*batch_size+batch_size]}
         true_count += correct_count.eval(feed_dict=feed_dict, session=sess)
 
     accuracy = float(true_count)/num_examples
@@ -180,7 +181,7 @@ def  get_acc(sess, correct_count, mdct_placeholder, labels_placeholder, mdct_dat
 def main():
     loss_list = []
     valid_acc_list = []
-    max_acc = 0
+#    max_acc = 0
     if hps.mode == 'train_init':
         mdct_placeholder = tf.placeholder(tf.int32, [hps.batch_size, hps.feature_row, hps.feature_col], name='data')
         labels_placeholder = tf.placeholder(tf.int32, [hps.batch_size, 1], name='labels')
@@ -212,7 +213,7 @@ def main():
                     step, lr, loss_value, cnt
                 ))
                 loss_list.append(loss_value)
-                if step % 100 == 0:
+                if step % 300 == 0:
                     valid_acc = get_acc(sess, model.correct_count,mdct_placeholder,labels_placeholder,valid_datas,valid_labels)
                     tp_cont_acc = get_acc(sess, model.tp_count, mdct_placeholder, labels_placeholder,valid_datas,valid_labels)
                     tn_cont_acc = get_acc(sess, model.tn_count, mdct_placeholder, labels_placeholder,valid_datas,valid_labels)
@@ -225,7 +226,7 @@ def main():
                         max_acc = valid_acc
                         saver_path = saver.save(sess, './checkpoint/{}.ckpt'.format(step))
                         print("Model saved in file:", saver_path)
-                    if step >= 2700:
+                    if step >= 10000:
                         file = open('./loss.txt', 'w')
                         for length in range(0, len(loss_list), 1):
 						    file.write(str(length+1))
@@ -264,9 +265,9 @@ def main():
             labels = test_labels_data[bound * i:bound * (i + 1)]
             print('---------test_data_{:.2f}--------'.format(i + 1))
             for step in xrange(bound//hps.batch_size):
-                liu_label = np.reshape(labels, [len(data), 1])
+                reshaped_label = np.reshape(labels, [len(data), 1])
                 feed_dict = {mdct_placeholder: data[step * hps.batch_size:step * hps.batch_size + hps.batch_size],
-                             labels_placeholder: liu_label[step * hps.batch_size:step * hps.batch_size + hps.batch_size]}
+                             labels_placeholder: reshaped_label[step * hps.batch_size:step * hps.batch_size + hps.batch_size]}
                 acc_cnt += sess.run(correct_count, feed_dict=feed_dict)
                 tp_acc_cnt += sess.run(tp_count, feed_dict=feed_dict)
                 tn_acc_cnt += sess.run(tn_count, feed_dict=feed_dict)
