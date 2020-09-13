@@ -182,7 +182,7 @@ def main():
     loss_list = []
     valid_acc_list = []
 #    max_acc = 0
-    if hps.mode == 'train_init':
+    if hps.is_training == True:
         mdct_placeholder = tf.placeholder(tf.int32, [hps.batch_size, hps.feature_row, hps.feature_col], name='data')
         labels_placeholder = tf.placeholder(tf.int32, [hps.batch_size, 1], name='labels')
         model = test_model.model(hps, mdct_placeholder, labels_placeholder)
@@ -243,7 +243,7 @@ def main():
                         file.close()
                         break;
         sess.close()
-    elif hps.mode =='test':
+    elif hps.is_training == False:
         feature = []
         test_data, test_labels_data = read_test_data()
         sess = tf.Session()
